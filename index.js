@@ -15,7 +15,7 @@ let isDrawing = false;
 let lastX = 0;
 let lastY = 0;
 let hue = 0;
-// variable for line width change
+// flag for line width change
 let direction = true;
 
 function draw(event) {
@@ -39,6 +39,7 @@ function draw(event) {
 
   // Toggle direction at max and min width
   if (ctx.lineWidth >= 100 || ctx.lineWidth <= 1) {
+    // Flip flag
     direction = !direction;
   }
   // Increment line width
