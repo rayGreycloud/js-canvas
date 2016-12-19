@@ -5,7 +5,7 @@ const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 // Set stroke parameters
-ctx.strokeStyle = '#BADA55';
+ctx.strokeStyle = `BADA55`;
 ctx.lineJoin = 'round';
 ctx.lineCap = 'round';
 ctx.lineWidth = 20;
@@ -14,11 +14,14 @@ ctx.lineWidth = 20;
 let isDrawing = false;
 let lastX = 0;
 let lastY = 0;
+let hue = 0;
 
 function draw(event) {
   // prevent drawing unless mousedown
   if (!isDrawing) return;
-
+  // Set color
+  ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+  // Draw line
   ctx.beginPath();
   // Start at last position
   ctx.moveTo(lastX, lastY);
@@ -27,6 +30,9 @@ function draw(event) {
   // Draw line
   ctx.stroke();
   lastX, lastY = [event.offsetX, event.offsetY];
+  // Increment color
+  hue++
+  if (hue > 360) hue = 0;
 }
 
 // Mousedown so set isDrawing to true
