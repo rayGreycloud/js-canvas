@@ -15,6 +15,8 @@ let isDrawing = false;
 let lastX = 0;
 let lastY = 0;
 let hue = 0;
+// variable for line width change
+let direction = true;
 
 function draw(event) {
   // prevent drawing unless mousedown
@@ -30,9 +32,21 @@ function draw(event) {
   // Draw line
   ctx.stroke();
   lastX, lastY = [event.offsetX, event.offsetY];
+
   // Increment color
-  hue++
+  hue++;
   if (hue > 360) hue = 0;
+
+  // Toggle direction at max and min width
+  if (ctx.lineWidth >= 100 || ctx.lineWidth <= 1) {
+    direction = !direction;
+  }
+  // Increment line width
+  if (direction) {
+    ctx.lineWidth = ctx.lineWidth + 0.5;
+  } else {
+    ctx.lineWidth = ctx.lineWidth - 0.7;
+  }
 }
 
 // Mousedown so set isDrawing to true
